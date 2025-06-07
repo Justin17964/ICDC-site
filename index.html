@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
   <title>ICDC Debate Site</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Full-page background image */
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 50px;
+    }
+
+    #google-login {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4285F4;
+      color: white;
+      cursor: pointer;
+    }
+
+    #google-login:hover {
+      background-color: #3367D6;
+    }
+
+    #user-info {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#signup">Sign Up</a></li>
-      </ul>
-    </nav>
-  </header>
+  <h1>Welcome to ICDC Debate Site</h1>
+  <button id="google-login">Login with Google</button>
+  <div id="user-info"></div>
 
-  <section id="introduction" class="section">
-    <div class="content">
-      <h1>Welcome to Our Debate Hub</h1>
-      <p>Think deeper. Speak clearer. Win minds.</p>
-    </div>
-  </section>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  <section id="about" class="section">
-    <div class="content">
-      <h2>About</h2>
-      <p>Content coming soon...</p>
-    </div>
-  </section>
+    const firebaseConfig = {
+      apiKey: "AIzaSyD8PgqBk77scFWCP0CbAkK__01Dp6tr4Vg",
+      authDomain: "icdc-fca25.firebaseapp.com",
+      projectId: "icdc-fca25",
+      storageBucket: "icdc-fca25.appspot.com",
+      messagingSenderId: "398496199141",
+      appId: "1:398496199141:web:afbde0dcc0eb3e714abf0c",
+      measurementId: "G-W1YL50VBF9"
+    };
 
-  <section id="contact" class="section">
-    <div class="content">
-      <h2>Contact</h2>
-      <p>Email us at: <a href="mailto:ianye1412@gmail.com">ianye1412@gmail.com</a></p>
-    </div>
-  </section>
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const provider = new GoogleAuthProvider();
 
-  <section id="signup" class="section">
-    <div class="content">
-      <h2>Sign Up</h2>
-      <form id="signup-form">
-        <input type="text" name="name" placeholder="Your Name" required /><br />
-        <input type="email" name="email" placeholder="Your Email" required /><br />
-        <button type="submit">Submit</button>
-      </form>
-      <p id="form-message"></p>
-    </div>
-  </section>
+    document.getElementById("google-login").addEventListener("click", async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
 
-  <script>
-    document.getElementById('signup-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const name = e.target.name.value;
-      const email = e.target.email.value;
-      document.getElementById('form-message').textContent =
-        `Thank you, ${name}! We'll reach out to ${email} soon.`;
-      e.target.reset();
+        document.getElementById("user-info").innerText = `Hello, ${user.displayName}!`;
+
+        await setDoc(doc(db, "users", user.uid), {
+          name: user.displayName,
+          email: user.email,
+          loginTime: new Date().toISOString()
+        });
+
+        console.log("User saved to Firestore.");
+      } catch (error) {
+        console.error("Login failed:", error.message);
+      }
     });
   </script>
 </body>
