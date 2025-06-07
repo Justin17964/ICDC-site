@@ -1,8 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   font-family: Arial, sans-serif;
+  height: 100%;
   color: white;
   background-color: black;
   background-image: url('background.jpg');
@@ -13,7 +13,24 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Sticky navigation bar */
+/* Limit how much background takes up */
+body::before {
+  content: "";
+  display: block;
+  height: 100vh;
+  background-image: inherit;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+/* Sticky navbar */
 header {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 1em;
