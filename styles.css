@@ -1,15 +1,15 @@
-/* Base styles */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-image: url('background.jpg');
-  background-size: cover;
-  background-position: center;
+  background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   color: white;
 }
 
-/* Sticky header with navigation */
+/* Sticky nav bar */
 header {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 1em;
@@ -36,7 +36,7 @@ nav ul li a {
   font-weight: bold;
 }
 
-/* Section styling */
+/* Section layout */
 .section {
   min-height: 100vh;
   display: flex;
@@ -44,7 +44,7 @@ nav ul li a {
   justify-content: center;
   text-align: center;
   padding: 2em;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6); /* dim background for readability */
 }
 
 .content {
@@ -59,7 +59,7 @@ h1, h2 {
   margin-bottom: 0.5em;
 }
 
-/* Form styling */
+/* Sign-up form */
 form input {
   width: 80%;
   padding: 0.5em;
