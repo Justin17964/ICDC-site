@@ -4,12 +4,13 @@ body {
   background-image: url('background.jpg');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center top;
   background-attachment: fixed;
   color: white;
+  background-color: black; /* fallback for empty space */
 }
 
-/* Sticky nav bar */
+/* Sticky header with nav */
 header {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 1em;
@@ -36,7 +37,7 @@ nav ul li a {
   font-weight: bold;
 }
 
-/* Section layout */
+/* Sections */
 .section {
   min-height: 100vh;
   display: flex;
@@ -44,7 +45,7 @@ nav ul li a {
   justify-content: center;
   text-align: center;
   padding: 2em;
-  background-color: rgba(0, 0, 0, 0.6); /* dim background for readability */
+  background-color: rgba(0, 0, 0, 0.6); /* readable overlay */
 }
 
 .content {
@@ -59,7 +60,7 @@ h1, h2 {
   margin-bottom: 0.5em;
 }
 
-/* Sign-up form */
+/* Form styling */
 form input {
   width: 80%;
   padding: 0.5em;
