@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Debate Hub</title>
+  <title>ICDC Debate Site</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -56,7 +56,8 @@
       e.preventDefault();
       const name = e.target.name.value;
       const email = e.target.email.value;
-      document.getElementById('form-message').textContent = `Thank you, ${name}! We'll reach out to ${email} soon.`;
+      document.getElementById('form-message').textContent =
+        `Thank you, ${name}! We'll reach out to ${email} soon.`;
       e.target.reset();
     });
   </script>
