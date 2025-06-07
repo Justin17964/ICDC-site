@@ -1,16 +1,19 @@
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: Arial, sans-serif;
+  color: white;
+  background-color: black;
   background-image: url('background.jpg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
   background-attachment: fixed;
-  color: white;
-  background-color: black; /* fallback for empty space */
+  overflow-x: hidden;
 }
 
-/* Sticky header with nav */
+/* Sticky navigation bar */
 header {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 1em;
@@ -22,8 +25,8 @@ header {
 
 nav ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 nav ul li {
@@ -37,19 +40,19 @@ nav ul li a {
   font-weight: bold;
 }
 
-/* Sections */
+/* Section layout */
 .section {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   padding: 2em;
-  background-color: rgba(0, 0, 0, 0.6); /* readable overlay */
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.85);
 }
 
 .content {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 2em;
   border-radius: 10px;
   max-width: 600px;
